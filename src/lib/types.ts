@@ -1,0 +1,41 @@
+export type VCardType = {
+  firstName?: string;
+  middleName?: string;
+  lastName?: string;
+  uid?: string;
+  organization?: string;
+  workPhone?: string;
+  birthday?: Date;
+  title?: string;
+  url?: string;
+  workUrl?: string;
+  note?: string;
+  nickname?: string;
+  namePrefix?: string;
+  nameSuffix?: string;
+  gender?: string;
+  anniversary?: Date;
+  role?: string;
+  homePhone?: Array<string>;
+  cellPhone?: Array<string>;
+  pagerPhone?: Array<string>;
+  email?: Array<string>;
+  workEmail?: Array<string>;
+  homeAddress?: {
+    label?: string;
+    street?: string;
+    city?: string;
+    stateProvince?: string;
+    postalCode?: string;
+    countryRegion?: string;
+  };
+  workAddress?: {
+    label?: string;
+    street?: string;
+    city?: string;
+    stateProvince?: string;
+    postalCode?: string;
+    countryRegion?: string;
+  };
+  socialUrls?: Object<string>;
+};
