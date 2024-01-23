@@ -1,15 +1,29 @@
-/* import type { VCardType } from "./types"; */
 import VCard from "vcards-js";
 
 export function generateVCard(data) {
-  const keys = Object.keys(data);
+  if (!data) return;
+
   const vCard = new VCard();
+  const {
+    firstName,
+    organization,
+    url,
+    cellPhone,
+    workPhone,
+    email,
+    workEmail,
+    homeAddress_label,
+  } = data;
 
-  vCard.version = "3.0";
-
-  keys.forEach((key: string | Date) => {
-    vCard[key] = data[key];
-  });
+  vCard.version = "3.0"
+  if (firstName) vCard.firstName = firstName;
+  if (organization) vCard.organization = organization;
+  if (url) vCard.url = url;
+  if (cellPhone) vCard.cellPhone = cellPhone;
+  if (workPhone) vCard.workPhone = workPhone;
+  if (email) vCard.email = email;
+  if (workEmail) vCard.workEmail = workEmail;
+  if (homeAddress_label) vCard.homeAddress.label = homeAddress_label;
 
   return vCard.getFormattedString();
 }
