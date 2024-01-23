@@ -20,7 +20,7 @@ export function generateQr(data: string | object | WifiConfig) {
   const errorCorrectionLevel = "L";
   const qr = qrCode(typeNumber, errorCorrectionLevel);
 
-  qr.addData(cleanData);
+  qr.addData(cleanData as string);
   qr.make();
 
   return qr.createSvgTag(4);
