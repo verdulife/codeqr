@@ -6,7 +6,7 @@
   function changeTab() {
     $qrType = selector;
     if ($qrType === TYPES.WIFI) {
-      $qrData = { ssid: "", password: "", type: "WPA", hidden: "" };
+      $qrData = { ssid: "", password: "", type: "WPA", hidden: false };
     } else if ($qrType === TYPES.VCARD) {
       $qrData = {
         firstName: "",
@@ -24,8 +24,8 @@
 
 <button
   on:click={changeTab}
-  class={`px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 uppercase transition
-    ${type === selector && "bg-white text-black"}`}
+  class="px-4 py-2 text-white grow hover:bg-gray-800 rounded-md font-semibold capitalize transition"
+  class:bg-blue-500={type === selector}
 >
   <slot />
 </button>

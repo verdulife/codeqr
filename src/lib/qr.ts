@@ -6,7 +6,10 @@ import { TYPES } from "./constants";
 import qrCode from "qrcode-generator";
 import { encodeWifiConfig, type WifiConfig } from "./wifi";
 
-export function generateQr(data: string | object | WifiConfig) {
+export function generateQr(
+  data: string | object | WifiConfig,
+  asImage: boolean = false,
+) {
   const type = get(qrType);
   let cleanData = data;
 
@@ -23,5 +26,8 @@ export function generateQr(data: string | object | WifiConfig) {
   qr.addData(cleanData as string);
   qr.make();
 
-  return qr.createSvgTag(4);
+  return !asImage ? qr.createSvgTag({
+    scalable: true
+
+  }) : qr.createDataURL(35);
 }

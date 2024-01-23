@@ -9,39 +9,50 @@
   import FormWifi from "@/components/FormWifi.svelte";
   import Qr from "@/components/Qr.svelte";
 
-  let result;
+  let downloadEl;
+  $: svg = generateQr($qrData);
 
   async function copySvgQR() {
-    await navigator.clipboard.writeText(result);
+    await navigator.clipboard.writeText(svg);
   }
 
-  $: $qrData, (result = generateQr($qrData));
+  function downloadQr() {
+    downloadEl.href = generateQr($qrData, true);
+  }
 </script>
 
-<section class="flex w-full flex-col items-center gap-20 p-10">
-  <header class="bg-white/20 p-4 rounded-xl border border-gray-500">
+<article
+  class="flex items-start w-full max-w-6xl mx-auto bg-gray-950 p-8 rounded-xl border border-gray-700 mt-10"
+>
+  <section class="flex flex-col grow gap-8 w-2/3 pr-8">
     <Tabs></Tabs>
-  </header>
 
-  <article class="flex flex-row items-start gap-4 w-full max-w-3xl">
-    <section class="flex grow">
-      {#if $qrType === TYPES.VCARD}
-        <FormVcard></FormVcard>
-      {:else if $qrType === TYPES.WIFI}
-        <FormWifi></FormWifi>
-      {:else}
-        <FormString></FormString>
-      {/if}
-    </section>
+    {#if $qrType === TYPES.VCARD}
+      <FormVcard></FormVcard>
+    {:else if $qrType === TYPES.WIFI}
+      <FormWifi></FormWifi>
+    {:else}
+      <FormString></FormString>
+    {/if}
+  </section>
 
-    <section class="flex w-1/3">
-      {#if result}
-        <button on:click={copySvgQR} class="size-full">
-          <Qr>
-            {@html result}
-          </Qr>
-        </button>
-      {/if}
-    </section>
-  </article>
-</section>
+  <section class="flex flex-col gap-2 w-1/3">
+    {#if svg}
+      <button on:click={copySvgQR} class="size-full">
+        <Qr>
+          {@html svg}
+        </Qr>
+      </button>
+
+      <a
+        href="/"
+        download="qr.gif"
+        bind:this={downloadEl}
+        on:click={downloadQr}
+        class="px-4 py-2 bg-blue-500 text-white text-center rounded-lg hover:bg-blue-700 transition"
+      >
+        DOWNLOAD
+      </a>
+    {/if}
+  </section>
+</article>

@@ -1,8 +1,12 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
 import App from "@/components/App.svelte";
+import Footer from "@/components/Footer.astro";
 ---
 
 <Layout title="Code QR" description="Code QR">
+  <Header />
   <App client:load />
+  <Footer />
 </Layout>

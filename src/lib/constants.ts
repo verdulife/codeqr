@@ -9,12 +9,9 @@ export const TYPES = {
 
 export const VCARD_TYPES = [
   "firstName",
-  "organization",
-  "url",
   "cellPhone",
-  "workPhone",
   "email",
-  "workEmail",
+  "url",
   "homeAddress_label",
 ];
 
